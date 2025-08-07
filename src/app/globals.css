@@ -1,0 +1,24 @@
+@import "tailwindcss";
+@plugin '../hero.ts';
+
+@source '../../node_modules/@heroui/theme/dist/**/*.{js,ts,jsx,tsx}';
+@custom-variant dark (&:is(.dark *));
+
+:root {
+  --background: #f4f4f5;
+  --foreground: #27272a;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: var(--font-roboto);
+  --font-mono: var(--font-roboto);
+  --font-heading: var(--font-akshar);
+}
+
+body {
+  width: 100%;
+  height: 100svh;
+  font-family: Roboto, sans-serif;
+}
