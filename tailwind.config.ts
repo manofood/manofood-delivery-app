@@ -1,5 +1,4 @@
 import type { Config } from 'tailwindcss'
-import themeConfig from '@/hero'
 
 const config: Config = {
   content: [
@@ -10,8 +9,7 @@ const config: Config = {
     './src/components/**/*.{js,ts,jsx,tsx,mdx}',
     './src/modules/**/*.{js,ts,jsx,tsx,mdx}',
     './node_modules/@heroui/theme/dist/components/(button|ripple|spinner).js'
-  ],
-  plugins: [themeConfig]
+  ]
 }
 
 export default config

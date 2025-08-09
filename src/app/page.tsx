@@ -1,6 +1,6 @@
 'use client'
 
-import { Button } from '@heroui/button'
+import { Button } from '@/components/ui/button'
 import { Heading } from '@/components/ui/heading'
 import Header from '@/components/wired/header'
 
