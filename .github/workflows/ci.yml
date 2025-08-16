@@ -1,0 +1,55 @@
+name: CI
+
+on:
+  pull_request:
+    types: [opened, reopened, synchronize, ready_for_review]
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  lint:
+    name: Lint
+    runs-on: ubuntu-latest
+    steps:
+      - name: 🔄 Checkout
+        uses: actions/checkout@v4
+
+      - name: 🔧 Setup Biome
+        uses: biomejs/setup-biome@v2
+        with:
+          version: ""
+
+      - name: 🔍 Run Biome
+        run: biome ci .
+
+  typecheck:
+    name: Type Check
+    runs-on: ubuntu-latest
+    steps:
+      - name: 🔄 Checkout
+        uses: actions/checkout@v4
+
+      - name: 🔧 Setup Dependencies
+        uses: ./.github/actions/setup
+
+      - name: 🔍 Run type check
+        run: pnpm typecheck
+
+  security:
+    name: Security
+    runs-on: ubuntu-latest
+    steps:
+      - name: 🔄 Checkout
+        uses: actions/checkout@v4
+
+      - name: ⤵️ Install pnpm
+        uses: pnpm/action-setup@v4
+
+      - name: 🔍 Audit for vulnerabilities
+        run: pnpm dlx audit-ci@^7 --config ./audit-ci.jsonc

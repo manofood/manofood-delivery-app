@@ -1,0 +1,25 @@
+name: Setup Dependencies
+description: Sets up the dependencies for the current package
+
+inputs:
+  registry-token:
+    description: The registry token
+    required: true
+
+runs:
+  using: composite
+  steps:
+    - name: ⤵️ Install pnpm
+      uses: pnpm/action-setup@v4
+      with:
+        version: 10.8.0
+
+    - name: 🔧 Setup Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version-file: '.node-version'
+        cache: 'pnpm'
+
+    - name: 🛟 Install Dependencies
+      shell: bash
+      run: pnpm install --frozen-lockfile
